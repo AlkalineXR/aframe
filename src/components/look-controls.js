@@ -17,7 +17,8 @@ module.exports.Component = registerComponent('look-controls', {
     enabled: {default: true},
     hmdEnabled: {default: true},
     reverseMouseDrag: {default: false},
-    standing: {default: true}
+    standing: {default: true},
+    tiltEnabled: {default: true}
   },
 
   init: function () {
@@ -165,7 +166,7 @@ module.exports.Component = registerComponent('look-controls', {
     hmdQuaternion = hmdQuaternion.copy(this.dolly.quaternion);
     hmdEuler.setFromQuaternion(hmdQuaternion, 'YXZ');
 
-    if (sceneEl.isMobile) {
+    if (sceneEl.isMobile && this.data.tiltEnabled) {
       // On mobile, do camera rotation with touch events and sensors.
       rotation = {
         x: radToDeg(hmdEuler.x) + radToDeg(pitchObject.rotation.x),
